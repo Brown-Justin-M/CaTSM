@@ -1,0 +1,13 @@
+config.log
+Makefile
+*.mod
+*.o
+CaTSM
+autom4te.cache
+config.status
+log
+*.nc
+*.csv
+*.dat
+.DS_Store
+*~

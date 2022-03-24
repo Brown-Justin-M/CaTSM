@@ -1,0 +1,35 @@
+&grid
+x_modes = 32
+z_modes = 256
+x_length = 0.05
+z_length = 0.4
+/
+
+&parameters
+params%max_time = 4000.0
+params%start_dt = 2.0e-2
+params%max_dt = 2.0e-2
+params%eos = "linear"
+params%bound_record = .true.
+params%rho_ref = 1000.0
+params%p_ref = 1.0e5
+params%t_ref = 300.0
+params%alr = 8.0e-9
+params%beta_t = 2.0e-4
+params%beta_c = 8.0e-4
+params%buoy = 9.81
+params%cs = 1500.0
+params%implicit = .true.
+/
+
+&io
+controls%steps_data = 2500
+controls%steps_restart = 1000
+controls%steps_diag = 1
+controls%steps_profile = 100
+controls%file_input = "infile.nc"
+controls%file_diag = "diag.csv"
+controls%file_restart = "restart.nc"
+controls%file_data = "data.nc"
+controls%file_profile = "profiles.nc"
+/

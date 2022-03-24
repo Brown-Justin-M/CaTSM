@@ -1,0 +1,37 @@
+&grid
+x_modes = 2
+z_modes = 256
+x_length = 1.0
+z_length = 2.0
+/
+
+&parameters
+params%max_time = 0.01
+params%start_dt = 1.000000e-07
+params%max_dt = 1.000000e-07
+params%diff_vel = 0.0
+params%diff_t = 0.0e-8
+params%buoy = 0.0
+params%diff_c = 0.0e-8
+params%diff_vel = 0.0e-8
+params%rho_ref = 25.0
+params%gamma = 1.4
+params%cv = 714.2857143
+params%t_ref = 300.0
+params%p_ref = 1.0e4
+params%eos = "ideal"
+params%reflection = .false.
+params%implicit = .false.
+/
+
+&io
+controls%steps_data = 5000
+controls%steps_restart = 100
+controls%steps_diag = 1
+controls%steps_profile = 100
+controls%file_input = "infile.nc"
+controls%file_data = "data01.nc"
+controls%file_diag = "diag01.csv"
+controls%file_profile = "profiles01.nc"
+controls%file_restart = "restart01.nc"
+/

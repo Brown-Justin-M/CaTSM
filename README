@@ -1,0 +1,86 @@
+RRRRRRR    OOOOOO   MMM  MMM  EEEEEE
+RR   RRR  OOO  OOO  MMMMMMMM  EE      
+RRRRRRR   OO    OO  MM MM MM  EEEEEE
+RR   RR   OOO  OOO  MM    MM  EE      
+RR    RR   OOOOOO   MM    MM  EEEEEE
+====================================
+====================================
+
+Written by: Justin Brown
+Contact: jmbrown2@nps.edu
+
+README
+
+    Rome is a fluid code designed to solve double-diffusive and microscale
+    fluid problems within sheared environments. The background shear is prescribed
+    at run-time. The code uses the pseudo-spectral method and is periodic in
+    all directions. Initial steps are carried out using a Runge--Kutta/Crank--
+    Nicolson method, but the bulk of the code uses the Adams--Bashforth/Backwards
+    Differentiation Formula.
+
+ACKNOWLEDGEMENTS
+
+    Rome was constructed using Stephan Stellmach's PADDI code as a template and 
+    similarly adopts the time-stepping schemes from Roger Peyret's "Spectral 
+    Methods for Incompressible Viscous Flow."
+
+DEPENDENCIES
+
+    Rome depends on the FFTW and NetCDF fortran libraries. It is recommended to
+    use the following versions:
+
+        FFTW: 3.3.9_1
+        NetCDF: 4.8.0_1
+
+INSTALL
+
+    To install Rome, use the configure command:
+
+        ./configure
+        make
+
+    This will compile the ROME executable in the main directory of the code. If 
+    the dependencies are not in a standard place or if the fortran compiler does 
+    not have a standard name, these can be specified through environment variables
+    to configure. For example,
+
+        ./configure FC=gfortran-11 FCFLAGS="-I/usr/local/include -L/usr/local/lib"
+
+    Alternatively, the home directories of FFTW and NetCDF can be specified 
+    manually with
+
+        ./configure FFTW_HOME=/path/to/fftw NETCDF_HOME=/path/to/netcdf
+
+RUN
+
+    To run, Rome requires a single parameter file named "parameters" and can be 
+    executed from the terminal without arguments. If the file is named something 
+    other than parameters, the user can instead run
+
+        ROME name_of_parameter_file
+
+    The parameter file is a fortran namelist file containing three namelists: grid, 
+    parameters, and io. Examples can be found in test/finger or test/kh for 
+    a standard non-shearing fingering convection simulation and a typical Kelvin--
+    Helmholtz simulation, respectively. Additional parameters can be found in
+    the grid_type object definition in src/grid_module.F90, the params_type object
+    definition in src/params_module.F90, and the controllers_type object definition
+    in src/IO/output_module.F90 for the three namelists, respectively.
+
+OUTPUTS
+
+    Rome outputs four files during a typical simulation. The names of these files
+    can be specified using the io namelist. The number of steps in between outputs
+    can also be specified using the io namelist. Files ending with ".nc" are in
+    the NetCDF format.
+
+    data.nc: A full 3D time record of the simulation in physical space.
+
+    restart.nc: A spectral output at a single time to use as a restart
+
+    profiles.nc: A time record of vertical profiles
+
+    diag.csv: A CSV file containing global averages of critical quantities like
+    the heat and salt fluxes and the rms values of the velocities/temperature/
+    salinity perturbations.
+
