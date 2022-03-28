@@ -182,8 +182,6 @@ contains
     call deriv_z(grid,x,work_s)
     dissipation = dissipation + sum_squares(grid,work_s)
 
-    dissipation = dissipation / grid%xyz_n
-
     deallocate(work_s)
   end function
 
